@@ -1,0 +1,40 @@
+/* This is a .css file for the web form  */
+
+html, body {
+ min-height: 100%;
+ }
+
+body, div, form,input,select,textarea, p {
+  padding: 10;
+  margin: 0;
+  outline: 10px;
+  font-family: sans-serif;
+  color: #002966;
+  line-height: 22px;
+  font-weight: bold;
+  width: 100%;
+}
+.form-design{
+  width:100%;
+  padding:20px;
+  border-radius:6px;
+  box-shadow:0 0 20px 0 #666666;
+  background-color: #e6f0ff;
+
+}
+.jumbotron{
+  padding:40px;
+}
+.block {
+  margin-top: 10px;
+  text-align:center;
+  justify-content:center;
+  width:150px;
+  padding:10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0066ff;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+ }

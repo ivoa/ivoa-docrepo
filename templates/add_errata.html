@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+
+ <head> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>IVOA Document Repository</title>
+    <link href="{{ url_for('static', filename ='css/web_form.css') }}" rel="stylesheet"/>
+
+ </head>
+
+  <body>
+
+	<div class="jumbotron text-center" style="background-color:#cccccc; color: rgb(0,0,150)">
+          <h1><strong><span style="color: rgb(0,0,102)">Add Erratas for the current Recommendations</span></strong></h1>
+          <h3><strong><span style="color: rgb(0,0,102)">Please fill up the following form to add the Erratas</span></strong></h3>
+        </div>
+
+        <div class="container">
+          <div class="form-design" style="font-size:20px">
+
+            <form method="post">
+              {{form.hidden_tag()}}
+              <p>{{form.ivoa_docname.label}} {{form.ivoa_docname()}}</p>
+              <br>
+              <p>{{form.erratum_number.label}} {{form.erratum_number()}}</p>
+              <br>
+              <p>{{form.erratum_title.label}} {{form.erratum_title()}}</p>
+              <br>
+              <p>{{form.erratum_author.label}} {{form.erratum_author()}}</p>
+              <br>
+              <p>{{form.erratum_date.label}} {{form.erratum_date()}}</p>
+              <br>
+              <p>{{form.erratum_accepted_date.label}} {{form.erratum_accepted_date()}}</p>
+              <br>
+              <p>{{form.erratum_link.label}} {{form.erratum_link()}}</p>
+              <br>
+              <p>{{form.submit(class="block")}}
+              <input type="reset" value="Reset" class="block"></p>
+            </form>
+          </div>
+        </div>
+
+
+  </body>
+</html>
+
+
+
+
+
+{% endblock %}
+

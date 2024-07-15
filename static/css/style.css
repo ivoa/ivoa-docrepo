@@ -1,0 +1,107 @@
+
+/* Home page starts */
+body {
+  padding: 2em 1em 2em 70px;
+  margin: 0;
+  font-family: sans-serif;
+  color: black;
+  background: white;
+  background-position: top left;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  text-align: left;
+}
+
+.titleText {
+  color: #0D0F7E;
+  text-decoration: none;
+  text-align: center;
+  font-family: helvetica,'new century schoolbook','gothic light';
+  font-style: normal;
+  font-size: 40pt
+}
+
+.nodec {
+  text-decoration: none;
+  color: #547FAA;
+  font-size: 40pt;
+  }
+
+:link { color: #547FAA; background: transparent}
+:visited { color: #547FAA; background: transparent}
+a:active { color: #547FAA; background: transparent}
+
+a:link img, a:visited img { border-style: none}
+a img { color: white; }
+@media all {
+  a img { color: inherit; }
+}
+
+th, td {
+  font-family: sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 { text-align: left }
+h1, h2, h3 { color: #005A9C;}
+h1 { font: 170% sans-serif }
+h2 { font: 140% sans-serif }
+h3 { font: 120% sans-serif }
+h4 { font: bold 100% sans-serif }
+h5 { font: italic 100% sans-serif }
+h6 { font: small-caps 100% sans-serif }
+
+.hide { display: none }
+
+div.head { margin-bottom: 1em }
+div.head h1 { margin-top: 2em; clear: both }
+div.head table { margin-left: 2em; margin-top: 2em }
+
+p.copyright { font-size: small }
+p.copyright small { font-size: small }
+
+@media screen {
+a[href]:hover { background: #ffa }
+}
+
+pre { margin-left: 2em }
+
+dt, dd { margin-top: 0; margin-bottom: 0 }
+dt { font-weight: bold }
+
+pre, code { font-family: monospace }
+
+ul.toc {
+  list-style: disc;
+  list-style: none;
+}
+
+.doccoordinator {
+  font-size: 11px;
+  line-height: 11px;
+  margin-top: 4px;
+  margin-bottom: 7px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  position: relative;
+  right: 100px;
+  bottom: 0;
+  left: 9px;
+  text-align: left;
+  max-width: 90%
+}
+
+@media aural {
+  h1, h2, h3 { stress: 20; richness: 90 }
+  .hide { speak: none }
+  p.copyright { volume: x-soft; speech-rate: x-fast }
+  dt { pause-before: 20% }
+  pre { speak-punctuation: code }
+}
+/* Home page ends */
+
+/* Submit New Document starts*/
+
+
+
+
+/* Submit New Document ends*/

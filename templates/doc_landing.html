@@ -1,0 +1,97 @@
+<!-- This is the IVOA Document -->
+
+{% extends "base.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>IVOA-{{doc_info_1.docname}}</title>
+    <meta name="keywords" content="IVOA, International, Virtual, Observatory, Alliance, Documents">
+    <meta name="maintainedBy" content="IVOA Document Coordinator, ivoadoc@ivoa.net">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+    .status_background{
+      background-position: top left;
+      background-size: auto;
+      background-repeat: no-repeat;
+      /* background-image: url({{ url_for('static', filename='ivoa_rec_v.png') }}) */
+    }
+    </style>
+  </head>
+
+
+<body>
+  <div class="container">
+    <div class="status_background">
+      <div class="titleText" style="font-size: 18pt font-weight:600">
+        <b>I</b>nternational &nbsp;<b>V</b>irtual &nbsp;<b>O</b>bservatory &nbsp;<b>A</b>lliance</div><br>
+      <div class="nodec" align="center" href="/view_db" title= "IVOA Documents"><b>IVOA Documents</b></div>
+        <a href="/"> <img src="{{ url_for('static', filename='IVOA_wb_300.jpg') }}" align="right" width="500" height="269" border="0" alt="ivoa.net"> </a>
+      <div class="head">
+        <h1>{{doc_info_1.title}} <br>
+        Version {{doc_info_1.version_major}}.{{doc_info_1.version_minor}}</h1>
+        <h2> IVOA {{doc_info_1.status}} {{doc_info_1.date}}</h2>
+        <br>
+        <dt>Interest/Working Group:</dt>
+        <dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaApplications" target="_blank">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaApplications</a></dd>
+        <dt>Author(s):</dt>
+        <dd><b>{{doc_info_1.authors}}<br/></b></dd>
+        <dt>Editor(s):</dt>
+        <dd><b>{{doc_info_1.editors}}<br/></b></dd>
+        <dt>DOI:</dt>
+        <dd>{{ doc_info_3.doi}}</dd>
+      </div>
+      {% if doc_info_2.erratum_link %}
+      <h2 name="errata">Errata</h2>
+      <p> <a href="{{doc_info_2.erratum_link}}">{{doc_info_2.erratum_number}} Accepted Erratum (last change: {{doc_info_2.erratum_accepted_date}})</a></p>
+      {% endif %}
+      <h2>Abstract</h2>
+      <p>{{doc_info_1.abstract}}</p>
+      <div class="status">
+        <h2>Status of the Document</h2>
+        {% if doc_info_1.status == 'REC' %}
+          <p>This document has been produced by the {{doc_info_1.group_name}} Interest Group.<br/>
+          It has been reviewed by IVOA Members and other interested parties, and has been endorsed by the IVOA Executive Committee as an IVOA Recommendation.
+          It is a stable document and may be used as reference material or cited as a normative reference from another document.
+          IVOA's role in making the Recommendation is to draw attention to the specification and to promote its widespread deployment.
+          This enhances the functionality and interoperability inside the Astronomical Community.</p><br/>
+        {% elif doc_info_1.status == 'PR' %}
+          <p>This is an IVOA Proposed Recommendation made available for public review. <br>
+          It is appropriate to reference this document only as a recommended standard that is
+          under review and which may be changed before it is accepted as a full recommendation.</p>
+        {% elif doc_info_1.status == 'WD' %}
+          <p>This is an IVOA Working Draft for review by IVOA members and other interested parties. <br>
+          It is a draft document and may be updated, replaced, or obsoleted by other documents at any time.
+          It is inappropriate to use IVOA Working Drafts as reference materials or to cite them as other than "work in progress".</p>
+        {% elif doc_info_1.status == 'Note' %}
+          <p>This is an IVOA Note expressing suggestions from and opinions of the authors.<br>
+          It is intended to share best practices, possible approaches, or other perspectives on interoperability with the Virtual Observatory.
+          It should not be referenced or otherwise interpreted as a standard specification.</p>
+        {% elif doc_info_1.status == 'PEN' %}
+          <p>This is an IVOA Proposed Endorsed Note for review by IVOA members and other interested parties.
+          It is appropriate to reference this document only as a Proposed Endorsed Note that is under review and may change before it
+          is endorsed or may not be endorsed</p><br>
+        {% elif doc_info_1.status == 'EN' %}
+          <p>This document is an IVOA Endorsed Note. It has been reviewed and endorsed by the IVOA Technical Coordination Group as a stable,
+          citable document which constitutes valuable information for the IVOA community and beyond.</p>
+        {% else %}
+          <p>Other type of Document</p>
+        {% endif %}
+      </div>
+
+      <div class="documentfile">
+        <h2>Available formats: </h2>
+        <p> <a href="{{doc_info_1.docname}}/{{doc_info_1.docname}}.pdf">pdf</a></p>
+      </div>
+      <br>
+      <div class="doccoordinator">maintained by&nbsp;
+        <a title="IVOA Document Coordinator" href="mailto:ivoadoc@ivoa.net">::ivoa document coordinator::</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+{% endblock %}
+

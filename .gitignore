@@ -1,0 +1,6 @@
+# Ignore the .env file which contains the API Secret Key
+.env
+.ivoa_doc.py.swn
+.ivoa_doc.py.swo
+__pycache__/
+

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <style >
+    html, body {
+      min-height: 100%;
+    }
+
+    body, div, form,input,select,textarea, p {
+      padding: 10;
+      margin: 0;
+      outline: 10px;
+      font-family: sans-serif;
+      color: #002966;
+      line-height: 22px;
+      font-weight: bold;
+    }
+    .form-design{
+      width:100%;
+      padding:20px;
+      border-radius:6px;
+      box-shadow:0 0 20px 0 #666666;
+      background-color: #e6f0ff;
+
+    }
+    .jumbotron{
+      padding:40px;
+    }
+    .block {
+      margin-top: 10px;
+      text-align: center;
+      width:150px;
+      padding:10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #0066ff ;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+    }
+    </style>
+  </head>
+  <body>
+
+  <div class="jumbotron text-center" style="background-color:#cccccc; color: rgb(0,0,150)">
+    <h1><strong>Add RFC</strong></h1>
+  </div>
+    <div class="container">
+      <div class="form-design" style="font-size: 20px">
+
+        <form method="POST" enctype=multipart/form-data>
+          {{ form.hidden_tag() }}
+          <p>{{ form.ivoa_docname.label}} {{form.ivoa_docname()}}</p>
+          <br>
+          <p>{{ form.rfc_link.label }} {{form.rfc_link()}}</p>
+          <br>
+          <p>{{form.submit(class="block")}}
+          <input type="reset" value="Reset" class="block"></p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}
+

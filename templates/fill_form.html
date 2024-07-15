@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+{% block content %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>IVOA Document Repository</title>
+    <link href="{{ url_for('static', filename ='css/web_form.css') }}" rel="stylesheet"/>
+
+
+  </head>
+
+  <body>
+    <form method="post">
+      <div class="jumbotron text-center" style="background-color:#cccccc; color: rgb(0,0,150)">
+        <h1><strong>Submit New Document</strong></h1>
+      </div>
+
+      <div class="container">
+        <div class="form-design" style="font-size:20px">
+
+            {{form.hidden_tag()}}
+
+            <p>{{form.status.label}} {{form.status()}}</p><br>
+
+            <p>{{form.title.label}} {{form.title(id='title', onchange='CheckTitle(this.value);')}}</p><br>
+
+            <p>{{form.concise_name.label}} {{form.concise_name(id='concise_name', onchange='CheckConsiceName(this.value);')}}</p><br>
+
+            <p>{{form.group_name.label}} {{form.group_name()}}</p><br>
+
+            <p>{{form.version_major.label}} {{form.version_major()}}
+              {{form.version_minor.label}} {{form.version_minor()}}</p><br>
+
+            <p>{{form.date.label}} {{form.date()}}</p><br>
+
+            <p>{{form.authors.label}} {{form.authors()}}</p><br>
+
+            <p>{{form.editors.label}} {{form.editors()}}</p><br>
+
+            <p>{{form.abstract.label}} {{form.abstract()}}</p><br>
+
+            <p>{{form.extra_description.label}} {{form.extra_description()}}</p><br>
+
+            <p>{{form.email.label}} {{form.email()}}</p><br>
+
+            <p>{{form.comment.label}} {{form.comment()}}</p><br>
+
+            <p>{{form.available_formats.label}} {{form.available_formats()}}</p><br>
+	
+
+
+
+            <!-- html for submit and reset buttons -->
+
+            <p>{{form.submit(class="block")}}
+            <input type="reset" value="Reset" class="block"></p>
+        </div>
+      </div>
+    </form>
+  <script src="{{ url_for('static', filename ='js/web_form.js') }}"></script>
+  </body>
+  {% endblock %}
+
+
+            <!-- html for status of the Document -->
+
+              <!-- <div class="form-group">
+                    <label for="status">Status of the Document</label>
+                    <select class="form-control" id="status">
+                      <option selected>Select...</option>
+                      <option value="REC">IVOA Recommendation</option>
+                      <option value="PR">IVOA Proposed Recommendation</option>
+                      <option value="WD">IVOA Working Draft</option>
+                      <option value="NOTE">IVOA Note</option>
+                      <option value="PEN">Proposed Endorsed Note</option>
+                      <option value="EN">Endorsed Note</option>
+                      <option value="Other">Other</option>
+                    </select>
+              </div> -->
+
+              <!-- html for Title of the Document -->
+<!--
+                  <div class="form-group">
+                    <label for="title"> Title of the Document</label>
+                    <select class="form-control" id="title">
+                      <option selected>Select...</option>
+                      <option value="SAMP"> Simple Application Messaging Protocol</option>
+                      <option value="VOTable">VOTable Format definitions</option>
+                      <option value="MOC">HEALPix Multi-Order Coverage Map</option>
+                      <option value="HiPS">Hierarchical Progressive Survey</option>
+                      <option value="DALI">Data Access Layer Interface</option>
+                      <option value="DataLink">Data Link</option>
+                      <option value="ConeSearch">Simple Cone Search</option>
+                      <option value="SIA">Simple Image Access</option>
+                      <option value="SLAP">Simple Line Access Protocol</option>
+                      <option value="SSA">Simple Spectral Access</option>
+                      <option value="STC-S">STC-S: Space-Time Coordinate Metadata Linear String Implementation</option>
+                      <option value="TAProtocol">Table Access Protocol</option>
+                      <option value="TAPRegExt">TAPRegExt: A VOResource Schema Extension for Describing TAP Services</option>
+                      <option value="ADQL">Astronomical Data Query Language</option>
+                      <option value="SimDAL">Simulation Data Access Layer</option>
+                      <option value="VOEventTransport">VOEvent Transport Protocol</option>
+                      <option value="SODA">Server-side Operations for Data Access</option>
+                      <option value="ObjVisSAP">Object Visibility Simple Access Protocol</option>
+                      <option value="EPN-TAP">EPN-TAP: Publishing Solar System Data to the Virtual Observatory</option>
+                      <option value="PHOTDM">Photometry Data Model</option>
+                      <option value="SimDM">Simulation Data Model</option>
+                      <option value="STC">Space-Time Coordinate Metadata for the Virtual Observatory</option>
+                      <option value="CharacterisationDM">Data Model for Astronomical Dataset Characterisation</option>
+                      <option value="SSLDM">Simple Spectral Lines Data Model</option>
+                      <option value="SpectralDM">IVOA Spectral Data Model</option>
+                      <option value="ObsCore">ObsCore: Observation Data Model Core Components and its Implementation in the Table Access Protocol</option>
+                      <option value="VODML">VODML: A Consistent Modelling Language for IVOA Data Models</option>
+                      <option value="DatasetDM">Dataset Metadata Model</option>
+                      <option value="CubeDM">N-Dimensional Cube/Image Model</option>
+                      <option value="ProvenanceDM">Provenance Data Model</option>
+                      <option value="Coords">Astronomical Coordinates and Coordinate Systems</option>
+                      <option value="WCSTrans">WCS Trasform Model</option>
+                      <option value="Meas">Astronomical Measurements Model</option>
+                      <option value="ObsLocTAP">Observation Locator Table Access Protocol</option>
+                      <option value="PDL">Parameter Description Language</option>
+                      <option value="SSO">Single-Sign-On Profile: Authentication Mechanisms</option>
+                      <option value="VOSpace">VOSpace Service Specification</option>
+                      <option value="CredentialDelegation">Credential Delegation Protocol</option>
+                      <option value="UWS">Universal Worker Service</option>
+                      <option value="VOSI">IVOA Support Interfaces</option>
+                      <option value="GMS">Group Membership Service</option>
+                      <option value="IVOAIdentifiers">IVOA Identifiers</option>
+                      <option value="RegistryInterface">IVOA Registry Interfaces</option>
+                      <option value="RM">Resource Metadata for the Virtual Observatory</option>
+                      <option value="StandardsRegExt">StandardsRegExt: A VOResource Schema Extension for Describing IVOA Standards</option>
+                      <option value="SimpleDALRegExt">SimpleDALRegExt: Describing Simple Data Access Services</option>
+                      <option value="VOResource">VOResource: An XML Encoding Schema for Resource Metadata</option>
+                      <option value="VODataService">VODataService: A VOResource Schema Extension for Describing Collections and Services</option>
+                      <option value="RegTAP">RegTAP: Registry Relational Schema</option>
+                      <option value="VOUnits">VOUnits: Units in the VO</option>
+                      <option value="UCD">UCD: An IVOA Standard for Unified Content Descriptors</option>
+                      <option value="UCD1+">UCD1+ Controlled Vocabulary</option>
+                      <option value="UCDlistMaintenance">UCDlistMaintenance: Maintenance of the list of UCD words</option>
+                      <option value="Vocabularies">Vocabularies in the Virtual Observatory</option>
+                      <option value="DocStd">DocStd: IVOA Document Standards</option>
+                      <option value="VOEvent">Sky Event Reporting Metadata (VOEvent)</option>
+                      <option value="VOEventRegExt">VOEventRegExt: An XML Encoding Schema for Resource Metadata for Collections of Events</option>
+                    </select>
+                  </div> -->
+
+                  <!-- html for concise name of the Document -->
+<!--
+                  <fieldset disabled>
+                      <div class="form-group">
+                        <label for="concise_name">Concise Name</label>
+                        <input type="text" id="concise_name" class="form-control" placeholder="Concise Name">
+                      </div></fieldset> -->
+
+                      <!-- html for Group name of the Document -->
+
+
+                      <!-- <div class="form-group">
+                        <label for="group_name">Responsible I/W Group:</label>
+                        <select class="form-control" id="group_name">
+                          <option selected>Select...</option>
+                          <option value="ApplicationsApplications">Applications</option>
+                          <option value="Data Access Layer">Data Access Layer</option>
+                          <option value="Data Modelling">Data Modelling</option>
+                          <option value="Grid & Web Services">Grid & Web Services</option>
+                          <option value="Resource Registry">Resource Registry</option>
+                          <option value="Data Curation & Prevention IG">Data Curation & Prevention IG</option>
+                          <option value="Standard & Document Process">Standard & Document Process</option>
+                          <option value="Semantics">Semantics</option>
+                          <option value="Document Standards">Document Standards</option>
+                          <option value="Theory">Theory</option>
+                          <option value="VO Event">VO Event</option>
+                          <option value="VO table">VO table</option>
+                          <option value="VO Query Language">VO Query Language</option>
+                        </select>
+                      </div> -->
+
+
+                    <!-- html for Version Major of the Document -->
+<!--
+                    <div class="form-group">
+                      <label for="version_major">Version Major</label>
+                        <select class="form-control" id="version_major">
+                          <option selected>Select...</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                        </select>
+                      </div> -->
+
+                      <!-- html for Version Minor of the Document -->
+<!--
+                      <div class="form-group">
+                          <label for="version_minor">Version Minor</label>
+                            <select class="form-control" id="version_minor">
+                              <option selected>Select...</option>
+                              <option value="0">0</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                              <option value="6">6</option>
+                              <option value="7">7</option>
+                              <option value="8">8</option>
+                              <option value="9">9</option>
+                            </select>
+                          </div> -->
+
+<!-- Jinja templates for Date, authors, Editors, abstract, contributions, email, comments -->
+
+
+
+
+
+       <!-- <script>
+         document.getElementById("title").addEventListener("change", sample1);
+         function sample1() {
+           var s = document.getElementById("title").value;
+           document.getElementById("concise_name").value = s;
+           // if (s == 1)
+           // {
+           //   document.getElementById("concise_name").value = SAMP;
+           // }
+           // else if (s == 2)
+           // {
+           //   document.getElementById("concise_name").value = "VOTable";
+           // }
+           // else if (s == 3)
+           // {
+           //   document.getElementById("concise_name").value = "MOC";
+           // }
+           // else
+           // {
+           //   document.getElementById("concise_name").value = "HiPS";
+           // }
+         }
+       </script> -->
+       <!-- <p>{{form.status.label}} {{form.status()}}</p>
+       <br>
+       <p>{{form.title.label}} {{form.title()}}</p>
+       <br>
+       <p>{{form.concise_name.label}} {{form.concise_name()}}</p>
+       <br>
+       <p>{{form.version_major.label}} {{form.version_major()}}
+         {{form.version_minor.label}} {{form.version_minor()}}</p>
+       <br>
+       <p>{{form.date.label}} {{form.date()}}</p>
+       <br>
+       <p>{{form.authors.label}} {{form.authors()}}</p>
+       <br>
+       <p>{{form.editors.label}} {{form.editors()}}</p>
+       <br>
+       <p>{{form.group_name.label}} {{form.group_name()}}</p>
+       <br>
+       <p>{{form.abstract.label}} {{form.abstract()}}</p>
+       <br>
+       <p>{{form.contribute.label}} {{form.contribute()}}</p>
+       <br>
+       <p>{{form.email.label}} {{form.email()}}</p>
+       <br>
+       <p>{{form.comment.label}} {{form.comment()}}</p>
+       <br>
+       <p>{{form.submit(class="block")}}
+       <input type="reset" value="Reset" class="block"> </p> -->
+

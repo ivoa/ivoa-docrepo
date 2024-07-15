@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style >
+      .nav-item{
+        color: white;
+        }
+      .nav-item:hover{
+        color: rgb(255, 255, 153)
+      }
+    </style>
+    <title>IVOA Documents</title>
+  </head>
+  <body>
+
+  <nav class="navbar navbar-expand-lg" style="background-color:rgb(0,0,102)">
+
+  <div class="container-fluid">
+
+    <div class="navbar-nav">
+
+      <a class="nav-item nav-link" href="{{ url_for('index') }}"><b>Home</b></a>
+      <a class="nav-item nav-link" href="{{ url_for('view_db') }}"><b>Database</b></a>
+      <a class="nav-item nav-link" href="{{ url_for('add_errata') }}"><b>Add Erratas</b></a>
+      <a class="nav-item nav-link" href="{{ url_for('add_more') }}"><b>Add DOI</b></a>
+      <a class="nav-item nav-link" href="{{ url_for('rfc') }}"><b>Add RFC</b></a>
+      <a class="nav-item nav-link" href="{{ url_for('rec') }}"><b>Recommendations</b></a>
+      <a class="nav-item nav-link" href="{{ url_for('endorsed_notes') }}"><b>Endorsed Notes</b></a>
+      <a class="nav-item nav-link" href="{{ url_for('note') }}"><b>Notes</b></a>
+
+    </div>
+  </div>
+
+    <div class="nav justify-content-end ">
+      <button type="button" class="btn btn-outline-success btn-lg active">
+      <a class="nav-item nav-link" href="{{ url_for('fill_form') }}"><b>Submit New Document</b></a>
+      </button>
+    </div>
+
+
+  </nav>
+
+    {% block content %}
+
+    {% endblock %}
+  </body>
+</html>
+

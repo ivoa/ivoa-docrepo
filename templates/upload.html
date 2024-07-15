@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<html>
+  <head>
+    <title>File Upload</title>
+  </head>
+  <body>
+
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <div class="blockquote text-center">
+
+          <h1 class="display-4" style="color:rgb(0,0,102)"><strong>File Upload</strong></h1>
+          <h5>*Please upload .zip or .tar file formats</h5>
+        <br>
+          <form method="POST" enctype="multipart/form-data">
+          <h3><input type=file name=file ></h3>
+          
+          <h3><input type="submit" value="Upload"></h3>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}
+

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <div class="jumbotron">
+
+    <h1>Enter the name of the Document to be deleted</h1>
+    <form method="POST">
+
+      {{ form.hidden_tag() }}
+      {{ form.docname.label}}{{form.docname}}
+      <br>
+      {{ form.submit() }}
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+table, th, td {
+  border:3px solid black;
+  padding:10px;
+
+}
+</style>
+
+<div class="jumbotron text-center" style="background-color:#cccccc; color: rgb(0,0,150)">
+  <h1><strong><span style="color: rgb(0,0,102)">Database</span></strong></h1>
+</div>
+
+<div class="container text-center">
+  <table>
+    <tr>
+      <th>Document Name</th>
+      <th>Title</th>
+      <th>Group</th>
+      <th>Version</th>
+      <th>Status</th>
+      <th>Download PDF</th>
+    </tr>
+    {% for x in ivoa_db %}
+    <tr>
+      <ol>
+          <td><a href="http://testingdocrepo.ivoa.info/documents/{{x.docname}}">{{x.docname}}</td>
+          <td>{{x.title}}</td>
+          <td>{{x.group_name}}</td>
+          <td>{{x.version_major}}.{{x.version_minor}}</td>
+          <td>{{x.status}}</td>
+          <td><a href="http://testingdocrepo.ivoa.info/documents/{{x.docname}}/{{x.docname}}.pdf">pdf</td>
+        
+      </ol>
+    </tr>
+    {% endfor %}
+
+  </table>
+</div>
+<b>r
+
+
+{% endblock  %}
+

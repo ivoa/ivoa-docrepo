@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="utf-8">
+    <title>Tables</title>
+  </head>
+
+  <body>
+
+    {% for a in list %}
+    <ol>
+     {{a}}
+    </ol>
+    {% endfor %}
+
+
+    <!-- {% for a in app %}
+    <ol> Group = {{a.group_name}}, Title = {{a.title}},  Version = {{a.version_major}}.{{a.version_minor}}, Status = {{a.status}} </ol>
+    {% endfor %}
+
+    {% for b in dal %}
+    <ol> Group = {{b.group_name}}, Title = {{b.title}},  Version = {{b.version_major}}.{{b.version_minor}}, Status = {{b.status}} </ol>
+    {% endfor %} -->
+
+
+
+  </body>
+
+</html>
+
+
+
+
+
+{% endblock %}
+
