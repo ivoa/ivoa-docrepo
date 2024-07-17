@@ -19,6 +19,7 @@ from sqlalchemy import desc
 import zipfile, tarfile
 from tarfile import TarFile
 from werkzeug.security import safe_join
+from werkzeug.datastructures import MultiDict
 
 app = Flask(__name__)
 
@@ -299,10 +300,15 @@ def fill_form():
 def thank_you():
     return render_template('thankyou.html')
 
-@app.route('/add_errata', methods=['GET', 'POST'])
-def add_errata():
+@app.route('/add_errata/<docname>', methods=['GET', 'POST'])
+def add_errata(docname):
 
-    form = ErrataForm()
+    doc_info_1 = Ivoa.query.filter_by(docname=docname).first()
+
+    if request.method == 'GET':
+        form = ErrataForm(formdata=MultiDict({'ivoa_docname': doc_info_1.docname}))
+    else:
+        form = ErrataForm()
 
     if form.validate_on_submit():
         ivoa_docname = form.ivoa_docname.data
@@ -317,8 +323,9 @@ def add_errata():
         new_erratum = Errata(erratum_number,erratum_title,erratum_author,erratum_date,erratum_accepted_date,erratum_link,ivoa_docname,erratum_status)
         db.session.add(new_erratum)
         db.session.commit()
+
         return redirect(url_for('view_db'))
-    return render_template('add_errata.html', form=form)
+    return render_template('add_errata.html', form=form, doc_info_1=doc_info_1)
 
 @app.route('/add_more', methods=['GET','POST'])
 def add_more():
@@ -446,7 +453,10 @@ def delete():
         docname = form.docname.data
 
         record_ivoa = Ivoa.query.get(docname)
-
+	#record_ivoa = DOI_Bibcode.query.get(docname)
+	#record_ivoa = RFC_link.query.get(docname)
+	#record_ivoa = Errata.query.get(docname)
+	
         db.session.delete(record_ivoa)
         db.session.commit()
 

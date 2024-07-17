@@ -18,6 +18,23 @@
       background-repeat: no-repeat;
       /* background-image: url({{ url_for('static', filename='ivoa_rec_v.png') }}) */
     }
+    .Errata{
+      a:link, a:visited {
+      background-color: white;
+      color: black;
+      border: 2px solid blue;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      }
+
+      a:hover, a:active {
+        background-color: blue;
+        color: white;
+      }
+	}
+
     </style>
   </head>
 
@@ -85,6 +102,13 @@
         <h2>Available formats: </h2>
         <p> <a href="{{doc_info_1.docname}}/{{doc_info_1.docname}}.pdf">pdf</a></p>
       </div>
+      <br>
+        {% if doc_info_1.status == 'REC' %}
+        <div class="Errata">
+          <h2>Add Errata </h2>
+        <span style="color:red"><p><a class="nav-item nav-link" href="{{ url_for('add_errata', docname=doc_info_1.docname ) }}"><b>Add Erratas </b></a></p></span>
+        </div>
+        {% endif %}
       <br>
       <div class="doccoordinator">maintained by&nbsp;
         <a title="IVOA Document Coordinator" href="mailto:ivoadoc@ivoa.net">::ivoa document coordinator::</a>

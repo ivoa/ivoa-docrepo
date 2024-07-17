@@ -132,7 +132,7 @@ class InfoForm(FlaskForm):
 
 
 class ErrataForm(FlaskForm):
-    ivoa_docname = StringField('Name of the Document(Recommendations)')
+    ivoa_docname = StringField('Name of the Document')
     erratum_number = IntegerField('Erratum Number')
     erratum_title = StringField('Title of the Erratum')
     erratum_author = StringField('Author')
