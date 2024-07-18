@@ -57,9 +57,11 @@
         <dd><b>{{doc_info_1.authors}}<br/></b></dd>
         <dt>Editor(s):</dt>
         <dd><b>{{doc_info_1.editors}}<br/></b></dd>
+        {% if doc_info_3.doi %}
         <dt>DOI:</dt>
         <dd>{{ doc_info_3.doi}}</dd>
-      </div>
+        {% endif %}
+	</div>
       {% if doc_info_2.erratum_link %}
       <h2 name="errata">Errata</h2>
       <p> <a href="{{doc_info_2.erratum_link}}">{{doc_info_2.erratum_number}} Accepted Erratum (last change: {{doc_info_2.erratum_accepted_date}})</a></p>
@@ -109,6 +111,14 @@
         <span style="color:red"><p><a class="nav-item nav-link" href="{{ url_for('add_errata', docname=doc_info_1.docname ) }}"><b>Add Erratas </b></a></p></span>
         </div>
         {% endif %}
+
+	{% if doc_info_1.status == 'REC' and doc_info_3.doi == '' %}
+        <div class="Errata">
+          <h2>Add DOI and Bibcode </h2>
+          <p><a class="nav-item nav-link" href="{{ url_for('add_more', docname=doc_info_1.docname) }}"><b>Add DOI</b></a></p>
+        </div>
+        {% endif %}
+
       <br>
       <div class="doccoordinator">maintained by&nbsp;
         <a title="IVOA Document Coordinator" href="mailto:ivoadoc@ivoa.net">::ivoa document coordinator::</a>

@@ -327,11 +327,16 @@ def add_errata(docname):
         return redirect(url_for('view_db'))
     return render_template('add_errata.html', form=form, doc_info_1=doc_info_1)
 
-@app.route('/add_more', methods=['GET','POST'])
-def add_more():
+@app.route('/add_more/<docname>', methods=['GET','POST'])
+def add_more(docname):
 
-    form = MoreInfo()
-#    rec = Ivoa.query.filter_by(status='REC').all()
+    doc_info_1 = Ivoa.query.filter_by(docname=docname).first()
+    doc_info_3 = DOI_Bibcode.query.filter_by(ivoa_docname=docname).first()
+
+    if request.method == 'GET':
+        form = MoreInfo(formdata=MultiDict({'ivoa_docname': doc_info_1.docname}))
+    else:
+        form = MoreInfo()
 
     if form.validate_on_submit():
 
@@ -344,7 +349,7 @@ def add_more():
         db.session.commit()
 
         return redirect(url_for('view_db'))
-    return render_template('add_more.html', form=form)
+    return render_template('add_more.html', form=form,  doc_info_1=doc_info_1, doc_info_3=doc_info_3)
 
 @app.route('/add_rfc', methods=['GET','POST'])
 def rfc():
