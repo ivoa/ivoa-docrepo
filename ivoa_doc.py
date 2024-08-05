@@ -161,106 +161,77 @@ class Errata(db.Model):
 ###### VIEW FUNCTIONS ###########
 #################################
 
-#@app.route('/')
-#def test():
-#    return "This is ivoa_doc.py file used for testing"
-
 @app.route('/')
 @app.route("/documents/")
 def index():
-    SAMP = Ivoa.query.filter_by(group_name='Applications',status='REC',concise_name='SAMP').order_by(desc(Ivoa.date)).limit(1).all()
-    VOTable = Ivoa.query.filter_by(group_name='Applications',status='REC',concise_name='VOTable').order_by(desc(Ivoa.date)).limit(1).all()
-    MOC = Ivoa.query.filter_by(group_name='Applications',status='REC',concise_name='MOC').order_by(desc(Ivoa.date)).limit(1).all()
-    HiPS = Ivoa.query.filter_by(group_name='Applications',status='REC',concise_name='HiPS').order_by(desc(Ivoa.date)).limit(1).all()
-
-    DALI = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='DALI').order_by(desc(Ivoa.date)).limit(1).all()
-    DataLink = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='DataLink').order_by(desc(Ivoa.date)).limit(1).all()
-    ConeSearch = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='ConeSearch').order_by(desc(Ivoa.date)).limit(1).all()
-    SIA = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='SIA').order_by(desc(Ivoa.date)).limit(1).all()
-    SLAP = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='SLAP').order_by(desc(Ivoa.date)).limit(1).all()
-    SSA = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='SSA').order_by(desc(Ivoa.date)).limit(1).all()
-    STC_S = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='STC-S').order_by(desc(Ivoa.date)).limit(1).all()
-    TAP = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='TAP').order_by(desc(Ivoa.date)).limit(1).all()
-    TAPRegExt = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='TAPRegExt').order_by(desc(Ivoa.date)).limit(1).all()
-    ADQL = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='ADQL').order_by(desc(Ivoa.date)).limit(1).all()
-    SimDAL = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='SimDAL').order_by(desc(Ivoa.date)).limit(1).all()
-    VOEventTransport = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='VOEventTransport').order_by(desc(Ivoa.date)).limit(1).all()
-    SODA = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='SODA').order_by(desc(Ivoa.date)).limit(1).all()
-    ObjVisSAP = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='ObjVisSAP').order_by(desc(Ivoa.date)).limit(1).all()
-    EPNTAP = Ivoa.query.filter_by(group_name='Data Access Layer',status='REC',concise_name='EPNTAP').order_by(desc(Ivoa.date)).limit(1).all()
-
-    PHOTDM = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='PHOTDM').order_by(desc(Ivoa.date)).limit(1).all()
-    SimDM = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='SimDM').order_by(desc(Ivoa.date)).limit(1).all()
-    STC = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='STC').order_by(desc(Ivoa.date)).limit(1).all()
-    CharacterisationDM = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='CharacterisationDM').order_by(desc(Ivoa.date)).limit(1).all()
-    SSLDM = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='SSLDM').order_by(desc(Ivoa.date)).limit(1).all()
-    SpectralDM = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='SpectralDM').order_by(desc(Ivoa.date)).limit(1).all()
-    ObsCore = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='ObsCore').order_by(desc(Ivoa.date)).limit(1).all()
-    VODML = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='VODML').order_by(desc(Ivoa.date)).limit(1).all()
-    DatasetDM = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='DatasetDM').order_by(desc(Ivoa.date)).limit(1).all()
-    CubeDM = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='CubeDM').order_by(desc(Ivoa.date)).limit(1).all()
-    ProvenanceDM = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='ProvenanceDM').order_by(desc(Ivoa.date)).limit(1).all()
-    Coords = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='Coords').order_by(desc(Ivoa.date)).limit(1).all()
-    WCSTrans = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='WCSTrans').order_by(desc(Ivoa.date)).limit(1).all()
-    Meas = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='Meas').order_by(desc(Ivoa.date)).limit(1).all()
-    ObsLocTAP = Ivoa.query.filter_by(group_name='Data Modelling',status='REC',concise_name='ObsLocTAP').order_by(desc(Ivoa.date)).limit(1).all()
-
-    PDL = Ivoa.query.filter_by(group_name='Grid & Web Services',status='REC',concise_name='PDL').order_by(desc(Ivoa.date)).limit(1).all()
-    SSO = Ivoa.query.filter_by(group_name='Grid & Web Services',status='REC',concise_name='SSO').order_by(desc(Ivoa.date)).limit(1).all()
-    VOSpace = Ivoa.query.filter_by(group_name='Grid & Web Services',status='REC',concise_name='VOSpace').order_by(desc(Ivoa.date)).limit(1).all()
-    CredentialDelegation = Ivoa.query.filter_by(group_name='Grid & Web Services',status='REC',concise_name='CredentialDelegation').order_by(desc(Ivoa.date)).limit(1).all()
-    UWS = Ivoa.query.filter_by(group_name='Grid & Web Services',status='REC',concise_name='UWS').order_by(desc(Ivoa.date)).limit(1).all()
-    VOSI = Ivoa.query.filter_by(group_name='Grid & Web Services',status='REC',concise_name='VOSI').order_by(desc(Ivoa.date)).limit(1).all()
-    GMS = Ivoa.query.filter_by(group_name='Grid & Web Services',status='REC',concise_name='GMS').order_by(desc(Ivoa.date)).limit(1).all()
-
-    IVOAIdentifiers = Ivoa.query.filter_by(group_name='Resource Registry',status='REC',concise_name='IVOAIdentifiers').order_by(desc(Ivoa.date)).limit(1).all()
-    RegistryInterface = Ivoa.query.filter_by(group_name='Resource Registry',status='REC',concise_name='RegistryInterface').order_by(desc(Ivoa.date)).limit(1).all()
-    RM = Ivoa.query.filter_by(group_name='Resource Registry',status='REC',concise_name='RM').order_by(desc(Ivoa.date)).limit(1).all()
-    StandardsRegExt = Ivoa.query.filter_by(group_name='Resource Registry',status='REC',concise_name='StandardsRegExt').order_by(desc(Ivoa.date)).limit(1).all()
-    SimpleDALRegExt = Ivoa.query.filter_by(group_name='Resource Registry',status='REC',concise_name='SimpleDALRegExt').order_by(desc(Ivoa.date)).limit(1).all()
-    VOResource = Ivoa.query.filter_by(group_name='Resource Registry',status='REC',concise_name='VOResource').order_by(desc(Ivoa.date)).limit(1).all()
-    VODataService = Ivoa.query.filter_by(group_name='Resource Registry',status='REC',concise_name='VODataService').order_by(desc(Ivoa.date)).limit(1).all()
-    RegTAP = Ivoa.query.filter_by(group_name='Resource Registry',status='REC',concise_name='RegTAP').order_by(desc(Ivoa.date)).limit(1).all()
-
-    DataCurationandPreventionIG = Ivoa.query.filter_by(group_name='Data Curation & Prevention IG',status='REC').order_by(desc(Ivoa.date)).limit(1).all()
-    StandardandDocumentProcess = Ivoa.query.filter_by(group_name='Standard & Document Process',status='REC').order_by(desc(Ivoa.date)).limit(1).all()
-
-    VOUnits = Ivoa.query.filter_by(group_name='Semantics',status='REC',concise_name='VOUnits').order_by(desc(Ivoa.date)).limit(1).all()
-    UCD = Ivoa.query.filter_by(group_name='Semantics',status='REC',concise_name='UCD').order_by(desc(Ivoa.date)).limit(1).all()
-    UCD1plus = Ivoa.query.filter_by(group_name='Semantics',status='REC',concise_name='UCD1+').order_by(desc(Ivoa.date)).limit(1).all()
-    UCDlistMaintenance = Ivoa.query.filter_by(group_name='Semantics',status='REC',concise_name='UCDlistMaintenance').order_by(desc(Ivoa.date)).limit(1).all()
-    Vocabularies = Ivoa.query.filter_by(group_name='Semantics',status='REC',concise_name='Vocabularies').order_by(desc(Ivoa.date)).limit(1).all()
-
-    DocStd = Ivoa.query.filter_by(group_name='Document Standards',status='REC',concise_name="DocStd").order_by(desc(Ivoa.date)).limit(1).all()
-
-    Theory_rec = Ivoa.query.filter_by(group_name='Theory',status='REC').order_by(desc(Ivoa.date)).limit(1).all()
-
-    VOEvent = Ivoa.query.filter_by(group_name='VO Event',status='REC',concise_name='VOEvent').order_by(desc(Ivoa.date)).limit(1).all()
-    VOEventRegExt = Ivoa.query.filter_by(group_name='VO Event',status='REC',concise_name='VOEventRegExt').order_by(desc(Ivoa.date)).limit(1).all()
-
-    VOTable_rec = Ivoa.query.filter_by(group_name='VO table',status='REC').order_by(desc(Ivoa.date)).limit(1).all()
-
-    VOQueryLanguage_rec = Ivoa.query.filter_by(group_name='VO Query Language',status='REC').order_by(desc(Ivoa.date)).limit(1).all()
-
     ivoa_db = Ivoa.query.all()
 
-    #rec_only = Ivoa.query.filter_by(status='REC').all()
-    return render_template('home.html', SAMP=SAMP, VOTable=VOTable, MOC=MOC, HiPS=HiPS, DALI=DALI, DataLink=DataLink, ConeSearch=ConeSearch, SIA=SIA,
-                SLAP=SLAP, SSA=SSA, STC_S=STC_S, TAP=TAP, TAPRegExt=TAPRegExt, ADQL=ADQL, SimDAL=SimDAL, VOEventTransport=VOEventTransport, SODA=SODA,
-                ObjVisSAP=ObjVisSAP, EPNTAP=EPNTAP, PHOTDM=PHOTDM, SimDM=SimDM, STC=STC, CharacterisationDM=CharacterisationDM,
-                SSLDM=SSLDM, SpectralDM=SpectralDM, ObsCore=ObsCore, VODML=VODML, DatasetDM=DatasetDM, CubeDM=CubeDM, ProvenanceDM=ProvenanceDM,
-                Coords=Coords, WCSTrans=WCSTrans, Meas=Meas, ObsLocTAP=ObsLocTAP, PDL=PDL, SSO=SSO, VOSpace=VOSpace, CredentialDelegation=CredentialDelegation,
-                UWS=UWS, VOSI=VOSI, GMS=GMS, IVOAIdentifiers=IVOAIdentifiers, RegistryInterface=RegistryInterface, RM=RM, StandardsRegExt=StandardsRegExt,
-                SimpleDALRegExt=SimpleDALRegExt, VOResource=VOResource, VODataService=VODataService, RegTAP=RegTAP, VOUnits=VOUnits, UCD=UCD,
-                UCD1plus=UCD1plus, UCDlistMaintenance=UCDlistMaintenance, Vocabularies=Vocabularies, DocStd=DocStd, VOEvent=VOEvent, VOEventRegExt=VOEventRegExt,
-                VOQueryLanguage_rec=VOQueryLanguage_rec, VOTable_rec=VOTable_rec, Theory_rec=Theory_rec, DataCurationandPreventionIG=DataCurationandPreventionIG,
-                StandardandDocumentProcess=StandardandDocumentProcess, ivoa_db=ivoa_db)
+    SAMP_st = Ivoa.query.filter_by(concise_name='SAMP', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    SAMP_ip = Ivoa.query.filter_by(concise_name='SAMP').order_by(desc(Ivoa.date)).first() # Latest Document In progress
 
-    # rec_only = Ivoa.query.filter_by(status='REC').all()
-    # return render_template('home.html', rec_only=rec_only)
+    VOTable_st = Ivoa.query.filter_by(concise_name='VOTable', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    VOTable_ip = Ivoa.query.filter_by(concise_name='VOTable').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    MOC_st = Ivoa.query.filter_by(concise_name='MOC', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    MOC_ip = Ivoa.query.filter_by(concise_name='MOC').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    HiPS_st = Ivoa.query.filter_by(concise_name='HiPS', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    HiPS_ip = Ivoa.query.filter_by(concise_name='HiPS').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    DALI_st = Ivoa.query.filter_by(concise_name='DALI', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    DALI_ip = Ivoa.query.filter_by(concise_name='DALI').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    DataLink_st = Ivoa.query.filter_by(concise_name='DataLink', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    DataLink_ip = Ivoa.query.filter_by(concise_name='DataLink').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    ConeSearch_st = Ivoa.query.filter_by(concise_name='ConeSearch', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    ConeSearch_ip = Ivoa.query.filter_by(concise_name='ConeSearch').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    SIA_st = Ivoa.query.filter_by(concise_name='SIA', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    SIA_ip = Ivoa.query.filter_by(concise_name='SIA').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    SLAP_st = Ivoa.query.filter_by(concise_name='SLAP', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    SLAP_ip = Ivoa.query.filter_by(concise_name='SLAP').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    SSA_st = Ivoa.query.filter_by(concise_name='SSA', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    SSA_ip = Ivoa.query.filter_by(concise_name='SSA').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    STC_S_st = Ivoa.query.filter_by(concise_name='STC-S', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    STC_S_ip = Ivoa.query.filter_by(concise_name='STC-S').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    TAP_st = Ivoa.query.filter_by(concise_name='TAP', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    TAP_ip = Ivoa.query.filter_by(concise_name='TAP').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    TAPRegExt_st = Ivoa.query.filter_by(concise_name='TAPRegExt', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    TAPRegExt_ip = Ivoa.query.filter_by(concise_name='TAPRegExt').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    ADQL_st = Ivoa.query.filter_by(concise_name='ADQL', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    ADQL_ip = Ivoa.query.filter_by(concise_name='ADQL').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    SimDAL_st = Ivoa.query.filter_by(concise_name='SimDAL', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    SimDAL_ip = Ivoa.query.filter_by(concise_name='SimDAL').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    VOEventTransport_st = Ivoa.query.filter_by(concise_name='VOEventTransport', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    VOEventTransport_ip = Ivoa.query.filter_by(concise_name='VOEventTransport').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    SODA_st = Ivoa.query.filter_by(concise_name='SODA', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    SODA_ip = Ivoa.query.filter_by(concise_name='SODA').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    ObjVisSAP_st = Ivoa.query.filter_by(concise_name='ObjVisSAP', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    ObjVisSAP_ip = Ivoa.query.filter_by(concise_name='ObjVisSAP').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    EPNTAP_st = Ivoa.query.filter_by(concise_name='EPNTAP', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    EPNTAP_ip = Ivoa.query.filter_by(concise_name='EPNTAP').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    LineTAP_st = Ivoa.query.filter_by(concise_name='LineTAP', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    LineTAP_ip = Ivoa.query.filter_by(concise_name='LineTAP').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+
+    PHOTDM_st = Ivoa.query.filter_by(concise_name='PHOTDM', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
+    PHOTDM_ip = Ivoa.query.filter_by(concise_name='PHOTDM').order_by(desc(Ivoa.date)).first() # Latest Document In progress
 
 
-    return render_template('home.html')
+    return render_template('home.html',ivoa_db=ivoa_db, SAMP_st=SAMP_st, SAMP_ip=SAMP_ip, VOTable_st=VOTable_st, VOTable_ip=VOTable_ip, MOC_st=MOC_st,MOC_ip=MOC_ip,HiPS_st=HiPS_st, HiPS_ip=HiPS_ip, DALI_st=DALI_st, DALI_ip=DALI_ip, DataLink_st=DataLink_st, DataLink_ip=DataLink_ip, ConeSearch_st=ConeSearch_st, ConeSearch_ip=ConeSearch_ip,SIA_st=SIA_st, SIA_ip=SIA_ip, SLAP_st=SLAP_st, SLAP_ip=SLAP_ip, SSA_st=SSA_st,SSA_ip=SSA_ip, STC_S_st=STC_S_st, STC_S_ip=STC_S_ip, TAP_st=TAP_st, TAP_ip=TAP_ip,TAPRegExt_st=TAPRegExt_st, TAPRegExt_ip=TAPRegExt_ip, ADQL_st=ADQL_st, ADQL_ip=ADQL_ip, SimDAL_st=SimDAL_st, SimDAL_ip=SimDAL_ip,VOEventTransport_st=VOEventTransport_st,VOEventTransport_ip=VOEventTransport_ip, SODA_st=SODA_st, SODA_ip=SODA_ip, ObjVisSAP_st=ObjVisSAP_st, ObjVisSAP_ip=ObjVisSAP_ip, EPNTAP_st=EPNTAP_st, EPNTAP_ip=EPNTAP_ip,LineTAP_st=LineTAP_st, LineTAP_ip=LineTAP_ip, PHOTDM_st=PHOTDM_st, PHOTDM_ip=PHOTDM_ip)
+
 
 
 @app.route('/new_doc', methods=['GET','POST'])
