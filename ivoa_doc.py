@@ -20,7 +20,7 @@ import zipfile, tarfile
 from tarfile import TarFile
 from werkzeug.security import safe_join
 from werkzeug.datastructures import MultiDict
-
+from settings import SECRET_KEY
 app = Flask(__name__)
 
 # The UPLOAD_DIR folder contains all the .zip and .tar files that are uploaded by the app. 
@@ -31,7 +31,7 @@ UPLOAD_DIR = '/var/www/html/docrepo/uploads'
 # This is the main repository where the documents will be saved.
 documents = '/var/www/html/docrepo/documents'
 
-app.config['SECRET_KEY'] = 'mysecretkey' 
+app.config['SECRET_KEY'] = 'SECRET_KEY' 
 app.config['MAX_CONTENT_LENGTH'] = 300 * 1024 * 1024
 app.config['UPLOAD_EXTENSIONS'] = ['.zip','.tar']
 app.config['UPLOAD_DIR'] = UPLOAD_DIR
@@ -164,76 +164,35 @@ class Errata(db.Model):
 @app.route('/')
 @app.route("/documents/")
 def index():
-    ivoa_db = Ivoa.query.all()
 
-    SAMP_st = Ivoa.query.filter_by(concise_name='SAMP', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    SAMP_ip = Ivoa.query.filter_by(concise_name='SAMP').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+    rec_query = Ivoa.query.filter_by(status='REC').order_by(desc(Ivoa.date))
+    #the 'rec_query' gives the documents from the db which are only Recommendations and are arranged in the descending order by date, to get the most recent version
 
-    VOTable_st = Ivoa.query.filter_by(concise_name='VOTable', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    VOTable_ip = Ivoa.query.filter_by(concise_name='VOTable').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+    most_stable = [{"title": doc.title, "concise_name": doc.concise_name, "docname": doc.docname, "group_name": doc.group_name, "version_major": doc.version_major, "version_minor": doc.version_minor}
 
-    MOC_st = Ivoa.query.filter_by(concise_name='MOC', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    MOC_ip = Ivoa.query.filter_by(concise_name='MOC').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+    for doc in rec_query
+    ]
+    
+    
+    seen = set()
+    unique_doc = []
 
-    HiPS_st = Ivoa.query.filter_by(concise_name='HiPS', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    HiPS_ip = Ivoa.query.filter_by(concise_name='HiPS').order_by(desc(Ivoa.date)).first() # Latest Document In progress
+    for doc in most_stable:
+        if doc["title"] not in seen:
+            unique_doc.append(doc)
+            seen.add(doc['title'])
 
-    DALI_st = Ivoa.query.filter_by(concise_name='DALI', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    DALI_ip = Ivoa.query.filter_by(concise_name='DALI').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    DataLink_st = Ivoa.query.filter_by(concise_name='DataLink', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    DataLink_ip = Ivoa.query.filter_by(concise_name='DataLink').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    ConeSearch_st = Ivoa.query.filter_by(concise_name='ConeSearch', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    ConeSearch_ip = Ivoa.query.filter_by(concise_name='ConeSearch').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    SIA_st = Ivoa.query.filter_by(concise_name='SIA', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    SIA_ip = Ivoa.query.filter_by(concise_name='SIA').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    SLAP_st = Ivoa.query.filter_by(concise_name='SLAP', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    SLAP_ip = Ivoa.query.filter_by(concise_name='SLAP').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    SSA_st = Ivoa.query.filter_by(concise_name='SSA', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    SSA_ip = Ivoa.query.filter_by(concise_name='SSA').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    STC_S_st = Ivoa.query.filter_by(concise_name='STC-S', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    STC_S_ip = Ivoa.query.filter_by(concise_name='STC-S').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    TAP_st = Ivoa.query.filter_by(concise_name='TAP', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    TAP_ip = Ivoa.query.filter_by(concise_name='TAP').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    TAPRegExt_st = Ivoa.query.filter_by(concise_name='TAPRegExt', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    TAPRegExt_ip = Ivoa.query.filter_by(concise_name='TAPRegExt').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    ADQL_st = Ivoa.query.filter_by(concise_name='ADQL', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    ADQL_ip = Ivoa.query.filter_by(concise_name='ADQL').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    SimDAL_st = Ivoa.query.filter_by(concise_name='SimDAL', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    SimDAL_ip = Ivoa.query.filter_by(concise_name='SimDAL').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    VOEventTransport_st = Ivoa.query.filter_by(concise_name='VOEventTransport', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    VOEventTransport_ip = Ivoa.query.filter_by(concise_name='VOEventTransport').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    SODA_st = Ivoa.query.filter_by(concise_name='SODA', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    SODA_ip = Ivoa.query.filter_by(concise_name='SODA').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    ObjVisSAP_st = Ivoa.query.filter_by(concise_name='ObjVisSAP', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    ObjVisSAP_ip = Ivoa.query.filter_by(concise_name='ObjVisSAP').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    EPNTAP_st = Ivoa.query.filter_by(concise_name='EPNTAP', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    EPNTAP_ip = Ivoa.query.filter_by(concise_name='EPNTAP').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    LineTAP_st = Ivoa.query.filter_by(concise_name='LineTAP', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    LineTAP_ip = Ivoa.query.filter_by(concise_name='LineTAP').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-    PHOTDM_st = Ivoa.query.filter_by(concise_name='PHOTDM', status='REC').order_by(desc(Ivoa.date)).first() #Last stable version of the document
-    PHOTDM_ip = Ivoa.query.filter_by(concise_name='PHOTDM').order_by(desc(Ivoa.date)).first() # Latest Document In progress
-
-
-    return render_template('home.html',ivoa_db=ivoa_db, SAMP_st=SAMP_st, SAMP_ip=SAMP_ip, VOTable_st=VOTable_st, VOTable_ip=VOTable_ip, MOC_st=MOC_st,MOC_ip=MOC_ip,HiPS_st=HiPS_st, HiPS_ip=HiPS_ip, DALI_st=DALI_st, DALI_ip=DALI_ip, DataLink_st=DataLink_st, DataLink_ip=DataLink_ip, ConeSearch_st=ConeSearch_st, ConeSearch_ip=ConeSearch_ip,SIA_st=SIA_st, SIA_ip=SIA_ip, SLAP_st=SLAP_st, SLAP_ip=SLAP_ip, SSA_st=SSA_st,SSA_ip=SSA_ip, STC_S_st=STC_S_st, STC_S_ip=STC_S_ip, TAP_st=TAP_st, TAP_ip=TAP_ip,TAPRegExt_st=TAPRegExt_st, TAPRegExt_ip=TAPRegExt_ip, ADQL_st=ADQL_st, ADQL_ip=ADQL_ip, SimDAL_st=SimDAL_st, SimDAL_ip=SimDAL_ip,VOEventTransport_st=VOEventTransport_st,VOEventTransport_ip=VOEventTransport_ip, SODA_st=SODA_st, SODA_ip=SODA_ip, ObjVisSAP_st=ObjVisSAP_st, ObjVisSAP_ip=ObjVisSAP_ip, EPNTAP_st=EPNTAP_st, EPNTAP_ip=EPNTAP_ip,LineTAP_st=LineTAP_st, LineTAP_ip=LineTAP_ip, PHOTDM_st=PHOTDM_st, PHOTDM_ip=PHOTDM_ip)
+    return render_template('home.html', most_stable=unique_doc)
 
 
 
+#def index():
+#    ivoa_db = Ivoa.query.all()
+#    #app = Ivoa.query.filter_by(group_name='Applications').last()
+#    most_stable = Ivoa.query.filter_by(status='REC').order_by(desc(Ivoa.date)).all()
+#    return render_template('home.html', ivoa_db=ivoa_db, most_stable=most_stable)
+
+    
 @app.route('/new_doc', methods=['GET','POST'])
 def fill_form():
 

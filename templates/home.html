@@ -24,6 +24,8 @@
     tr{
       font-weight: bold
     }
+
+        
     th {
       border: 2px solid;
       border-color: black;
@@ -75,7 +77,8 @@
     background-color: #f5cba7;
     color: white;
     }
-
+    
+    tr:hover {background-color: lightblue;}
     </style>
   </head>
 
@@ -100,312 +103,104 @@
 
         <table class="tabledocs">
         <tr>
-            <th class="group">Group</th>
+            <th class="group">Group Name</th>
             <th class="doctitle">Title</th>
-            <th class="versionstable">Most stable</th>
+            <th class="versionstable">Most stable (REC)</th>
             <th class="versionnew">In progress</th>
         </tr>
 
-        <th rowspan="5" class="group" ><a href="/twiki/bin/view/IVOA/IvoaApplications">Applications</a></th>
-        {% if SAMP_st == SAMP_ip %}
-        <tr>
-          <td>{{SAMP_st.title}}</td>
-          <td class="{% if SAMP_st.status == 'REC' %}rec{% elif SAMP_st.status == 'PR' %}pr{% elif SAMP_st.status == 'WD' %}wd{% endif %}">{{SAMP_st.version_major}}.{{SAMP_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{SAMP_st.title}}</td>
-          <td class="{% if SAMP_st.status == 'REC' %}rec{% elif SAMP_st.status == 'PR' %}pr{% elif SAMP_st.status == 'WD' %}wd{% endif %}">{{SAMP_st.version_major}}.{{SAMP_st.version_minor}}</td>
-          <td class="{% if SAMP_ip.status == 'REC' %}rec{% elif SAMP_ip.status == 'PR' %}pr{% elif SAMP_ip.status == 'WD' %}wd{% endif %}">{{SAMP_ip.version_major}}.{{SAMP_ip.version_minor}}</td>
-        </tr>
+
+      <tr>
+        <td rowspan="5" class="group">Applications</td>
+        {% for doc in most_stable %}
+        {% if doc.group_name == 'Applications' %}
+        <td class="doctitle">{{doc.concise_name}} - {{doc.title}}</td>
+        <td class="versionstable">{{doc.version_major}}.{{doc.version_minor}}</td>
+        <td class="versionnew">NA</td>
         {% endif %}
-
-{% if VOTable_st == VOTable_ip %}
-        <tr>
-          <td>{{VOTable_st.title}}</td>
-          <td class="{% if VOTable_st.status == 'REC' %}rec{% elif VOTable_st.status == 'PR' %}pr{% elif VOTable_st.status == 'WD' %}wd{% endif %}">{{VOTable_st.version_major}}.{{VOTable_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{VOTable_st.title}}</td>
-          <td class="{% if VOTable_st.status == 'REC' %}rec{% elif VOTable_st.status == 'PR' %}pr{% elif VOTable_st.status == 'WD' %}wd{% endif %}">{{VOTable_st.version_major}}.{{VOTable_st.version_minor}}</td>
-          <td class="{% if VOTable_ip.status == 'REC' %}rec{% elif VOTable_ip.status == 'PR' %}pr{% elif VOTable_ip.status == 'WD' %}wd{% endif %}">{{VOTable_ip.version_major}}.{{VOTable_ip.version_minor}}</td>
-        </tr>
+      </tr>
+      {% endfor %}
+	
+	<tr>
+        <td rowspan="14" class="group">Data Access Layer</td>
+        {% for doc in most_stable %}
+        {% if doc.group_name == 'Data Access Layer' %}
+        <td class="doctitle">{{doc.concise_name}} - {{doc.title}}</td>
+        <td class="versionstable">{{doc.version_major}}.{{doc.version_minor}}</td>
+        <td class="versionnew">NA</td>
         {% endif %}
+      </tr>
+      {% endfor %}
 
-{% if MOC_st == MOC_ip %}
         <tr>
-          <td>{{MOC_st.title}}</td>
-          <td class="{% if MOC_st.status == 'REC' %}rec{% elif MOC_st.status == 'PR' %}pr{% elif MOC_st.status == 'WD' %}wd{% endif %}">{{MOC_st.version_major}}.{{MOC_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{MOC_st.title}}</td>
-          <td class="{% if MOC_st.status == 'REC' %}rec{% elif MOC_st.status == 'PR' %}pr{% elif MOC_st.status == 'WD' %}wd{% endif %}">{{MOC_st.version_major}}.{{MOC_st.version_minor}}</td>
-          <td class="{% if MOC_ip.status == 'REC' %}rec{% elif MOC_ip.status == 'PR' %}pr{% elif MOC_ip.status == 'WD' %}wd{% endif %}">{{MOC_ip.version_major}}.{{MOC_ip.version_minor}}</td>
-        </tr>
+        <td rowspan="14" class="group">Data Modelling</td>
+        {% for doc in most_stable %}
+        {% if doc.group_name == 'Data Modelling' %}
+        <td class="doctitle">{{doc.concise_name}} - {{doc.title}}</td>
+        <td class="versionstable">{{doc.version_major}}.{{doc.version_minor}}</td>
+        <td class="versionnew">NA</td>
         {% endif %}
+      </tr>
+      {% endfor %}
 
-        {% if HiPS_st == HiPS_ip %}
-        <tr>
-          <td>{{HiPS_st.title}}</td>
-          <td class="{% if HiPS_st.status == 'REC' %}rec{% elif HiPS_st.status == 'PR' %}pr{% elif HiPS_st.status == 'WD' %}wd{% endif %}">{{HiPS_st.version_major}}.{{HiPS_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{HiPS_st.title}}</td>
-          <td class="{% if HiPS_st.status == 'REC' %}rec{% elif HiPS_st.status == 'PR' %}pr{% elif HiPS_st.status == 'WD' %}wd{% endif %}">{{HiPS_st.version_major}}.{{HiPS_st.version_minor}}</td>
-          <td class="{% if HiPS_ip.status == 'REC' %}rec{% elif HiPS_ip.status == 'PR' %}pr{% elif HiPS_ip.status == 'WD' %}wd{% endif %}">{{HiPS_ip.version_major}}.{{HiPS_ip.version_minor}}</td>
-        </tr>
+	<tr>
+        <td rowspan="8" class="group">Grid and Web Services</td>
+        {% for doc in most_stable %}
+        {% if doc.group_name == 'Grid & Web Services' %}
+        <td class="doctitle">{{doc.concise_name}} - {{doc.title}}</td>
+        <td class="versionstable">{{doc.version_major}}.{{doc.version_minor}}</td>
+        <td class="versionnew">NA</td>
         {% endif %}
+      </tr>
+      {% endfor %}
 
-  <th rowspan="17" class="group" ><a href="https://wiki.ivoa.net/twiki/bin/view/IVOA/IvoaDAL">Data Access Layer</a></th>
-
-        {% if DALI_st == DALI_ip %}
-        <tr>
-          <td>{{DALI_st.title}}</td>
-          <td class="{% if DALI_st.status == 'REC' %}rec{% elif DALI_st.status == 'PR' %}pr{% elif DALI_st.status == 'WD' %}wd{% endif %}">{{DALI_st.version_major}}.{{DALI_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{DALI_st.title}}</td>
-          <td class="{% if DALI_st.status == 'REC' %}rec{% elif DALI_st.status == 'PR' %}pr{% elif DALI_st.status == 'WD' %}wd{% endif %}">{{DALI_st.version_major}}.{{DALI_st.version_minor}}</td>
-          <td class="{% if DALI_ip.status == 'REC' %}rec{% elif DALI_ip.status == 'PR' %}pr{% elif DALI_ip.status == 'WD' %}wd{% endif %}">{{DALI_ip.version_major}}.{{DALI_ip.version_minor}}</td>
-        </tr>
+	<tr>
+        <td rowspan="10" class="group">Resource Registry</td>
+        {% for doc in most_stable %}
+        {% if doc.group_name == 'Resource Registry' %}
+        <td class="doctitle">{{doc.concise_name}} - {{doc.title}}</td>
+        <td class="versionstable">{{doc.version_major}}.{{doc.version_minor}}</td>
+        <td class="versionnew">NA</td>
         {% endif %}
+      </tr>
+      {% endfor %}
 
-        {% if DataLink_st == DataLink_ip %}
-        <tr>
-          <td>{{DataLink_st.title}}</td>
-          <td class="{% if DataLink_st.status == 'REC' %}rec{% elif DataLink_st.status == 'PR' %}pr{% elif DataLink_st.status == 'WD' %}wd{% endif %}">{{DataLink_st.version_major}}.{{DataLink_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{DataLink_st.title}}</td>
-          <td class="{% if DataLink_st.status == 'REC' %}rec{% elif DataLink_st.status == 'PR' %}pr{% elif DataLink_st.status == 'WD' %}wd{% endif %}">{{DataLink_st.version_major}}.{{DataLink_st.version_minor}}</td>
-          <td class="{% if DataLink_ip.status == 'REC' %}rec{% elif DataLink_ip.status == 'PR' %}pr{% elif DataLink_ip.status == 'WD' %}wd{% endif %}">{{DataLink_ip.version_major}}.{{DataLink_ip.version_minor}}</td>
-        </tr>
+	<tr>
+        <td rowspan="7" class="group">Semantics</td>
+        {% for doc in most_stable %}
+        {% if doc.group_name == 'Semantics' or doc.group_name == 'http://www.ivoa.net/twiki/bin/view/IVOA/IvoaUCD' %}
+        <td class="doctitle">{{doc.concise_name}} - {{doc.title}}</td>
+        <td class="versionstable">{{doc.version_major}}.{{doc.version_minor}}</td>
+        <td class="versionnew">NA</td>
         {% endif %}
-
-        {% if ConeSearch_st == ConeSearch_ip %}
-        <tr>
-          <td>{{ConeSearch_st.title}}</td>
-          <td class="{% if ConeSearch_st.status == 'REC' %}rec{% elif ConeSearch_st.status == 'PR' %}pr{% elif ConeSearch_st.status == 'WD' %}wd{% endif %}">{{ConeSearch_st.version_major}}.{{ConeSearch_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{ConeSearch_st.title}}</td>
-          <td class="{% if ConeSearch_st.status == 'REC' %}rec{% elif ConeSearch_st.status == 'PR' %}pr{% elif ConeSearch_st.status == 'WD' %}wd{% endif %}">{{ConeSearch_st.version_major}}.{{ConeSearch_st.version_minor}}</td>
-          <td class="{% if ConeSearch_ip.status == 'REC' %}rec{% elif ConeSearch_ip.status == 'PR' %}pr{% elif ConeSearch_ip.status == 'WD' %}wd{% endif %}">{{ConeSearch_ip.version_major}}.{{ConeSearch_ip.version_minor}}</td>
-        </tr>
+      </tr>
+      {% endfor %}
+	
+	<tr>
+        <td rowspan="2" class="group">Standard and Document Process</td>
+        {% for doc in most_stable %}
+        {% if doc.group_name == 'Document Standards' %}
+        <td class="doctitle">{{doc.concise_name}} - {{doc.title}}</td>
+        <td class="versionstable">{{doc.version_major}}.{{doc.version_minor}}</td>
+        <td class="versionnew">NA</td>
         {% endif %}
+      </tr>
+      {% endfor %}
 
-        {% if SIA_st == SIA_ip %}
-        <tr>
-          <td>{{SIA_st.title}}</td>
-          <td class="{% if SIA_st.status == 'REC' %}rec{% elif SIA_st.status == 'PR' %}pr{% elif SIA_st.status == 'WD' %}wd{% endif %}">{{SIA_st.version_major}}.{{SIA_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{SIA_st.title}}</td>
-          <td class="{% if SIA_st.status == 'REC' %}rec{% elif SIA_st.status == 'PR' %}pr{% elif SIA_st.status == 'WD' %}wd{% endif %}">{{SIA_st.version_major}}.{{SIA_st.version_minor}}</td>
-          <td class="{% if SIA_ip.status == 'REC' %}rec{% elif SIA_ip.status == 'PR' %}pr{% elif SIA_ip.status == 'WD' %}wd{% endif %}">{{SIA_ip.version_major}}.{{SIA_ip.version_minor}}</td>
-        </tr>
+	<tr>
+        <td rowspan="3" class="group">VO Event</td>
+        {% for doc in most_stable %}
+        {% if doc.group_name == 'VO Event' %}
+        <td class="doctitle">{{doc.concise_name}} - {{doc.title}}</td>
+        <td class="versionstable">{{doc.version_major}}.{{doc.version_minor}}</td>
+        <td class="versionnew">NA</td>
         {% endif %}
-
-        {% if SLAP_st == SLAP_ip %}
-        <tr>
-          <td>{{SLAP_st.title}}</td>
-          <td class="{% if SLAP_st.status == 'REC' %}rec{% elif SLAP_st.status == 'PR' %}pr{% elif SLAP_st.status == 'WD' %}wd{% endif %}">{{SLAP_st.version_major}}.{{SLAP_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{SLAP_st.title}}</td>
-          <td class="{% if SLAP_st.status == 'REC' %}rec{% elif SLAP_st.status == 'PR' %}pr{% elif SLAP_st.status == 'WD' %}wd{% endif %}">{{SLAP_st.version_major}}.{{SLAP_st.version_minor}}</td>
-          <td class="{% if SLAP_ip.status == 'REC' %}rec{% elif SLAP_ip.status == 'PR' %}pr{% elif SLAP_ip.status == 'WD' %}wd{% endif %}">{{SLAP_ip.version_major}}.{{SLAP_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
-
-        {% if SSA_st == SSA_ip %}
-        <tr>
-          <td>{{SSA_st.title}}</td>
-          <td class="{% if SSA_st.status == 'REC' %}rec{% elif SSA_st.status == 'PR' %}pr{% elif SSA_st.status == 'WD' %}wd{% endif %}">{{SSA_st.version_major}}.{{SSA_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{SSA_st.title}}</td>
-          <td class="{% if SSA_st.status == 'REC' %}rec{% elif SSA_st.status == 'PR' %}pr{% elif SSA_st.status == 'WD' %}wd{% endif %}">{{SSA_st.version_major}}.{{SSA_st.version_minor}}</td>
-          <td class="{% if SSA_ip.status == 'REC' %}rec{% elif SSA_ip.status == 'PR' %}pr{% elif SSA_ip.status == 'WD' %}wd{% endif %}">{{SSA_ip.version_major}}.{{SSA_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
-
-      {% if STC_S_st == STC_S_ip %}
-        <tr>
-          <td>{{STC_S_st.title}}</td>
-          <td class="{% if STC_S_st.status == 'REC' %}rec{% elif STC_S_st.status == 'PR' %}pr{% elif STC_S_st.status == 'WD' %}wd{% endif %}">{{STC_S_st.version_major}}.{{STC_S_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{STC_S_st.title}}</td>
-          <td class="{% if STC_S_st.status == 'REC' %}rec{% elif STC_S_st.status == 'PR' %}pr{% elif STC_S_st.status == 'WD' %}wd{% endif %}">{{STC_S_st.version_major}}.{{STC_S_st.version_minor}}</td>
-          <td class="{% if STC_S_ip.status == 'REC' %}rec{% elif STC_S_ip.status == 'PR' %}pr{% elif STC_S_ip.status == 'WD' %}wd{% endif %}">{{STC_S_ip.version_major}}.{{STC_S_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
-
-        {% if TAP_st == TAP_ip %}
-        <tr>
-          <td>{{TAP_st.title}}</td>
-          <td class="{% if TAP_st.status == 'REC' %}rec{% elif TAP_st.status == 'PR' %}pr{% elif TAP_st.status == 'WD' %}wd{% endif %}">{{TAP_st.version_major}}.{{TAP_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{TAP_st.title}}</td>
-          <td class="{% if TAP_st.status == 'REC' %}rec{% elif TAP_st.status == 'PR' %}pr{% elif TAP_st.status == 'WD' %}wd{% endif %}">{{TAP_st.version_major}}.{{TAP_st.version_minor}}</td>
-          <td class="{% if TAP_ip.status == 'REC' %}rec{% elif TAP_ip.status == 'PR' %}pr{% elif TAP_ip.status == 'WD' %}wd{% endif %}">{{TAP_ip.version_major}}.{{TAP_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
-
-        {% if TAPRegExt_st == TAPRegExt_ip %}
-        <tr>
-          <td>{{TAPRegExt_st.title}}</td>
-          <td class="{% if TAPRegExt_st.status == 'REC' %}rec{% elif TAPRegExt_st.status == 'PR' %}pr{% elif TAPRegExt_st.status == 'WD' %}wd{% endif %}">{{TAPRegExt_st.version_major}}.{{TAPRegExt_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{TAP_st.title}}</td>
-          <td class="{% if TAPRegExt_st.status == 'REC' %}rec{% elif TAPRegExt_st.status == 'PR' %}pr{% elif TAPRegExt_st.status == 'WD' %}wd{% endif %}">{{TAPRegExt_st.version_major}}.{{TAPRegExt_st.version_minor}}</td>
-          <td class="{% if TAPRegExt_ip.status == 'REC' %}rec{% elif TAPRegExt_ip.status == 'PR' %}pr{% elif TAPRegExt_ip.status == 'WD' %}wd{% endif %}">{{TAPRegExt_ip.version_major}}.{{TAPRegExt_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
-
-        {% if ADQL_st == ADQL_ip %}
-        <tr>
-          <td>{{ADQL_st.title}}</td>
-          <td class="{% if ADQL_st.status == 'REC' %}rec{% elif ADQL_st.status == 'PR' %}pr{% elif ADQL_st.status == 'WD' %}wd{% endif %}">{{ADQL_st.version_major}}.{{ADQL_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{ADQL_st.title}}</td>
-          <td class="{% if ADQL_st.status == 'REC' %}rec{% elif ADQL_st.status == 'PR' %}pr{% elif ADQL_st.status == 'WD' %}wd{% endif %}">{{ADQL_st.version_major}}.{{ADQL_st.version_minor}}</td>
-          <td class="{% if ADQL_ip.status == 'REC' %}rec{% elif ADQL_ip.status == 'PR' %}pr{% elif ADQL_ip.status == 'WD' %}wd{% endif %}">{{ADQL_ip.version_major}}.{{ADQL_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
-
-        {% if SimDAL_st == SimDAL_ip %}
-        <tr>
-          <td>{{SimDAL_st.title}}</td>
-          <td class="{% if SimDAL_st.status == 'REC' %}rec{% elif SimDAL_st.status == 'PR' %}pr{% elif SimDAL_st.status == 'WD' %}wd{% endif %}">{{SimDAL_st.version_major}}.{{SimDAL_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{SimDAL_st.title}}</td>
-          <td class="{% if SimDAL_st.status == 'REC' %}rec{% elif SimDAL_st.status == 'PR' %}pr{% elif SimDAL_st.status == 'WD' %}wd{% endif %}">{{SimDAL_st.version_major}}.{{SimDAL_st.version_minor}}</td>
-          <td class="{% if SimDAL_ip.status == 'REC' %}rec{% elif SimDAL_ip.status == 'PR' %}pr{% elif SimDAL_ip.status == 'WD' %}wd{% endif %}">{{SimDAL_ip.version_major}}.{{SimDAL_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
-
-        {% if VOEventTransport_st == VOEventTransport_ip %}
-        <tr>
-          <td>{{VOEventTransport_st.title}}</td>
-          <td class="{% if VOEventTransport_st.status == 'REC' %}rec{% elif VOEventTransport_st.status == 'PR' %}pr{% elif VOEventTransport_st.status == 'WD' %}wd{% endif %}">{{VOEventTransport_st.version_major}}.{{VOEventTransport_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{VOEventTransport_st.title}}</td>
-          <td class="{% if VOEventTransport_st.status == 'REC' %}rec{% elif VOEventTransport_st.status == 'PR' %}pr{% elif VOEventTransport_st.status == 'WD' %}wd{% endif %}">{{VOEventTransport_st.version_major}}.{{VOEventTransport_st.version_minor}}</td>
-          <td class="{% if VOEventTransport_ip.status == 'REC' %}rec{% elif VOEventTransport_ip.status == 'PR' %}pr{% elif VOEventTransport_ip.status == 'WD' %}wd{% endif %}">{{VOEventTransport_ip.version_major}}.{{VOEventTransport_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
-
-        {% if SODA_st == SODA_ip %}
-        <tr>
-          <td>{{SODA_st.title}}</td>
-          <td class="{% if SODA_st.status == 'REC' %}rec{% elif SODA_st.status == 'PR' %}pr{% elif SODA_st.status == 'WD' %}wd{% endif %}">{{SODA_st.version_major}}.{{SODA_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{SODA_st.title}}</td>
-          <td class="{% if SODA_st.status == 'REC' %}rec{% elif SODA_st.status == 'PR' %}pr{% elif SODA_st.status == 'WD' %}wd{% endif %}">{{SODA_st.version_major}}.{{SODA_st.version_minor}}</td>
-          <td class="{% if SODA_ip.status == 'REC' %}rec{% elif SODA_ip.status == 'PR' %}pr{% elif SODA_ip.status == 'WD' %}wd{% endif %}">{{SODA_ip.version_major}}.{{SODA_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
-
-        {% if ObjVisSAP_st == ObjVisSAP_ip %}
-        <tr>
-          <td>{{ObjVisSAP_st.title}}</td>
-          <td class="{% if ObjVisSAP_st.status == 'REC' %}rec{% elif ObjVisSAP_st.status == 'PR' %}pr{% elif ObjVisSAP_st.status == 'WD' %}wd{% endif %}">{{ObjVisSAP_st.version_major}}.{{ObjVisSAP_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{ObjVisSAP_st.title}}</td>
-          <td class="{% if ObjVisSAP_st.status == 'REC' %}rec{% elif ObjVisSAP_st.status == 'PR' %}pr{% elif ObjVisSAP_st.status == 'WD' %}wd{% endif %}">{{ObjVisSAP_st.version_major}}.{{ObjVisSAP_st.version_minor}}</td>
-          <td class="{% if ObjVisSAP_ip.status == 'REC' %}rec{% elif ObjVisSAP_ip.status == 'PR' %}pr{% elif ObjVisSAP_ip.status == 'WD' %}wd{% endif %}">{{ObjVisSAP_ip.version_major}}.{{ObjVisSAP_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
-
-        {% if EPNTAP_st == EPNTAP_ip %}
-        <tr>
-          <td>{{EPNTAP_st.title}}</td>
-          <td class="{% if EPNTAP_st.status == 'REC' %}rec{% elif EPNTAP_st.status == 'PR' %}pr{% elif EPNTAP_st.status == 'WD' %}wd{% endif %}">{{EPNTAP_st.version_major}}.{{EPNTAP_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{EPNTAP_st.title}}</td>
-          <td class="{% if EPNTAP_st.status == 'REC' %}rec{% elif EPNTAP_st.status == 'PR' %}pr{% elif EPNTAP_st.status == 'WD' %}wd{% endif %}">{{EPNTAP_st.version_major}}.{{EPNTAP_st.version_minor}}</td>
-          <td class="{% if EPNTAP_ip.status == 'REC' %}rec{% elif EPNTAP_ip.status == 'PR' %}pr{% elif EPNTAP_ip.status == 'WD' %}wd{% endif %}">{{EPNTAP_ip.version_major}}.{{EPNTAP_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
-
-        {% if LineTAP_st == LineTAP_ip %}
-        <tr>
-          <td>{{LineTAP_st.title}}</td>
-          <td class="{% if LineTAP_st.status == 'REC' %}rec{% elif LineTAP_st.status == 'PR' %}pr{% elif LineTAP_st.status == 'WD' %}wd{% endif %}">{{LineTAP_st.version_major}}.{{LineTAP_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{LineTAP_st.title}}</td>
-          <td class="{% if LineTAP_st.status == 'REC' %}rec{% elif LineTAP_st.status == 'PR' %}pr{% elif LineTAP_st.status == 'WD' %}wd{% endif %}">{{LineTAP_st.version_major}}.{{LineTAP_st.version_minor}}</td>
-          <td class="{% if LineTAP_ip.status == 'REC' %}rec{% elif LineTAP_ip.status == 'PR' %}pr{% elif LineTAP_ip.status == 'WD' %}wd{% endif %}">{{LineTAP_ip.version_major}}.{{LineTAP_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
-
-  <th rowspan="19" class="group" ><a href="https://wiki.ivoa.net/twiki/bin/view/IVOA/IvoaDataModel">Data Model</a></th>
-
-        {% if PHOTDM_st == PHOTDM_ip %}
-        <tr>
-          <td>{{PHOTDM_st.title}}</td>
-          <td class="{% if PHOTDM_st.status == 'REC' %}rec{% elif PHOTDM_st.status == 'PR' %}pr{% elif PHOTDM_st.status == 'WD' %}wd{% endif %}">{{PHOTDM_st.version_major}}.{{PHOTDM_st.version_minor}}</td>
-          <td></td>
-        </tr>
-        {% else %}
-        <tr>
-          <td>{{PHOTDM_st.title}}</td>
-          <td class="{% if PHOTDM_st.status == 'REC' %}rec{% elif PHOTDM_st.status == 'PR' %}pr{% elif PHOTDM_st.status == 'WD' %}wd{% endif %}">{{PHOTDM_st.version_major}}.{{PHOTDM_st.version_minor}}</td>
-          <td class="{% if PHOTDM_ip.status == 'REC' %}rec{% elif PHOTDM_ip.status == 'PR' %}pr{% elif PHOTDM_ip.status == 'WD' %}wd{% endif %}">{{PHOTDM_ip.version_major}}.{{PHOTDM_ip.version_minor}}</td>
-        </tr>
-        {% endif %}
+      </tr>
+      {% endfor %}
 
 
+
+</table>
 </body>
 
 {% endblock %}

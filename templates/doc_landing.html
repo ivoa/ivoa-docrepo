@@ -47,12 +47,12 @@
       <div class="nodec" align="center" href="/view_db" title= "IVOA Documents"><b>IVOA Documents</b></div>
         <a href="/"> <img src="{{ url_for('static', filename='IVOA_wb_300.jpg') }}" align="right" width="500" height="269" border="0" alt="ivoa.net"> </a>
       <div class="head">
-        <h1>{{doc_info_1.title}} <br>
+        <h1>{{doc_info_1.concise_name}}-{{doc_info_1.title}} <br>
         Version {{doc_info_1.version_major}}.{{doc_info_1.version_minor}}</h1>
         <h2> IVOA {{doc_info_1.status}} {{doc_info_1.date}}</h2>
         <br>
         <dt>Interest/Working Group:</dt>
-        <dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaApplications" target="_blank">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaApplications</a></dd>
+        <dd><b>{{doc_info_1.group_name}}</b></dd>
         <dt>Author(s):</dt>
         <dd><b>{{doc_info_1.authors}}<br/></b></dd>
         <dt>Editor(s):</dt>

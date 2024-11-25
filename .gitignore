@@ -3,4 +3,9 @@
 .ivoa_doc.py.swn
 .ivoa_doc.py.swo
 __pycache__/
-
+*.pyc
+settings.py
+web.py
+/extras/
+/migrations/
+/virtualenv/
